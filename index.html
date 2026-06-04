@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>PROFSTROY ELITE | Премиальная визитка строительного рекрутинга</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0c12;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Анимированная строительная сетка на фоне */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 215, 0, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 215, 0, 0.08) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -2;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* Плавающие инструменты */
+        .floating-tools {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            font-size: 60px;
+            opacity: 0.08;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-tools-right {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-size: 55px;
+            opacity: 0.08;
+            pointer-events: none;
+            z-index: -1;
+            transform: rotate(15deg);
+        }
+
+        /* Главная карточка-визитка */
+        .elite-card {
+            max-width: 1100px;
+            width: 100%;
+            background: rgba(12, 18, 28, 0.92);
+            backdrop-filter: blur(20px);
+            border-radius: 64px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 215, 0, 0.1);
+            transition: 0.3s;
+        }
+
+        /* Золотая полоса сверху */
+        .gold-stripe {
+            height: 6px;
+            background: linear-gradient(90deg, #ffd700, #ffaa00, #ffd700);
+            width: 100%;
+        }
+
+        /* Внутренний контент */
+        .card-content {
+            padding: 48px 44px;
+        }
+
+        /* Хедер визитки */
+        .visa-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .logo-area h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #ffffff, #ffd700);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .logo-area p {
+            color: #ffd700;
+            font-size: 0.8rem;
+            margin-top: 6px;
+            letter-spacing: 2px;
+        }
+
+        .badge-area {
+            background: rgba(255, 215, 0, 0.12);
+            padding: 10px 22px;
+            border-radius: 60px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .badge-area i {
+            color: #ffd700;
+            margin-right: 8px;
+        }
+
+        /* Две колонки */
+        .two-columns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .col-left {
+            flex: 1.2;
+            min-width: 260px;
+        }
+
+        .col-right {
+            flex: 0.8;
+            min-width: 240px;
+        }
+
+        /* Контакты (крупно) */
+        .contact-big {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 48px;
+            padding: 28px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .contact-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ffd700;
+            margin-bottom: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 60px;
+            transition: 0.2s;
+        }
+
+        .contact-item:hover {
+            background: rgba(255, 215, 0, 0.1);
+            transform: translateX(5px);
+        }
+
+        .contact-item i {
+            font-size: 1.8rem;
+            color: #ffd700;
+            width: 40px;
+            text-align: center;
+        }
+
+        .contact-item .contact-info {
+            flex: 1;
+        }
+
+        .contact-item .label {
+            font-size: 0.7rem;
+            opacity: 0.7;
+        }
+
+        .contact-item .value {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .contact-item a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Интерактивный переключатель вакансий */
+        .job-switcher {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 48px;
+            padding: 28px;
+            margin-bottom: 30px;
+        }
+
+        .job-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ffd700;
+            margin-bottom: 20px;
+        }
+
+        .job-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+
+        .job-btn {
+            background: transparent;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            padding: 8px 18px;
+            border-radius: 40px;
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.85rem;
+        }
+
+        .job-btn.active {
+            background: #ffd700;
+            color: #0a0c12;
+            border-color: #ffd700;
+        }
+
+        .job-btn:hover {
+            background: rgba(255, 215, 0, 0.2);
+        }
+
+        .job-info {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 32px;
+        }
+
+        .job-salary-large {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #ffd700;
+            margin: 10px 0;
+        }
+
+        .job-desc {
+            color: #aaa;
+            font-size: 0.85rem;
+        }
+
+        .job-icon-large {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        /* Блок "Мы уже трудоустроили" */
+        .stats-card {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 48px;
+            padding: 28px;
+            text-align: center;
+        }
+
+        .stats-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #ffd700;
+            line-height: 1;
+        }
+
+        .stats-label {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            margin-top: 8px;
+        }
+
+        /* Зарплатные карточки */
+        .salary-grid {
+            display: flex;
+            gap: 16px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .salary-mini-card {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 28px;
+            padding: 16px;
+            text-align: center;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .salary-mini-card .city {
+            font-size: 0.75rem;
+            opacity: 0.7;
+        }
+
+        .salary-mini-card .amount {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #ffd700;
+        }
+
+        /* Преимущества */
+        .perks-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 25px 0;
+        }
+
+        .perk-chip {
+            background: rgba(255, 215, 0, 0.1);
+            padding: 8px 16px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .perk-chip i {
+            color: #ffd700;
+        }
+
+        /* QR-блок (динамический) */
+        .qr-section {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 40px;
+        }
+
+        .qr-code {
+            font-size: 5rem;
+            margin-bottom: 10px;
+            display: inline-block;
+            background: white;
+            padding: 15px;
+            border-radius: 24px;
+        }
+
+        .qr-text {
+            font-size: 0.7rem;
+            opacity: 0.7;
+        }
+
+        /* Футер визитки */
+        .visa-footer {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+            text-align: center;
+            font-size: 0.7rem;
+            opacity: 0.6;
+        }
+
+        @media (max-width: 800px) {
+            .card-content {
+                padding: 32px 24px;
+            }
+            .two-columns {
+                flex-direction: column;
+            }
+            .job-salary-large {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="floating-tools">
+        🏗️ 🔨 🧱 ⛑️
+    </div>
+    <div class="floating-tools-right">
+        🪚 🔧 🦺 📐
+    </div>
+
+    <div class="elite-card">
+        <div class="gold-stripe"></div>
+        
+        <div class="card-content">
+            <!-- Хедер -->
+            <div class="visa-header">
+                <div class="logo-area">
+                    <h1><i class="fas fa-hard-hat"></i> PROFSTROY <span style="color:#ffd700;">ELITE</span></h1>
+                    <p>СТРОИТЕЛЬНЫЙ РЕКРУТИНГ • ПРЕМИУМ КЛАСС</p>
+                </div>
+                <div class="badge-area">
+                    <i class="fas fa-certificate"></i> официальное трудоустройство • 2026
+                </div>
+            </div>
+
+            <!-- Две колонки -->
+            <div class="two-columns">
+                <!-- Левая колонка: контакты + переключатель вакансий -->
+                <div class="col-left">
+                    <!-- Контакты -->
+                    <div class="contact-big">
+                        <div class="contact-title"><i class="fas fa-phone-alt"></i> СВЯЗЬ 24/7</div>
+                        <div class="contact-item">
+                            <i class="fab fa-whatsapp"></i>
+                            <div class="contact-info">
+                                <div class="label">WHATSAPP</div>
+                                <div class="value"><a href="https://wa.me/375298445000" target="_blank">+375 29 844 5000</a></div>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-telegram-plane"></i>
+                            <div class="contact-info">
+                                <div class="label">TELEGRAM</div>
+                                <div class="value"><a href="https://t.me/+375336558368" target="_blank">+375 33 655 8368</a></div>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-telegram"></i>
+                            <div class="contact-info">
+                                <div class="label">TELEGRAM (2)</div>
+                                <div class="value"><a href="https://t.me/+375297310322" target="_blank">+375 29 731 0322</a></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Интерактивный переключатель вакансий -->
+                    <div class="job-switcher">
+                        <div class="job-title"><i class="fas fa-briefcase"></i> ВЫБЕРИ ПРОФЕССИЮ</div>
+                        <div class="job-buttons" id="jobButtons">
+                            <button class="job-btn active" data-job="demolition">Разнорабочий</button>
+                            <button class="job-btn" data-job="monolith">Монолитчик</button>
+                            <button class="job-btn" data-job="finisher">Отделочник</button>
+                            <button class="job-btn" data-job="foreman">Прораб</button>
+                        </div>
+                        <div class="job-info" id="jobInfo">
+                            <div class="job-icon-large" id="jobIcon">🧱</div>
+                            <div class="job-salary-large" id="jobSalary">от 150 000 ₽</div>
+                            <div class="job-desc" id="jobDesc">Демонтаж, подсобные работы, помощь бригадам. Без опыта — обучим!</div>
+                        </div>
+                    </div>
+
+                    <!-- Преимущества списком -->
+                    <div class="perks-grid">
+                        <div class="perk-chip"><i class="fas fa-home"></i> Жильё бесплатно</div>
+                        <div class="perk-chip"><i class="fas fa-utensils"></i> Питание бесплатно</div>
+                        <div class="perk-chip"><i class="fas fa-file-contract"></i> Официально</div>
+                        <div class="perk-chip"><i class="fas fa-calendar-check"></i> 2 выплаты/мес</div>
+                        <div class="perk-chip"><i class="fas fa-chart-line"></i> Рост до 300 000+</div>
+                    </div>
+                </div>
+
+                <!-- Правая колонка: зарплаты + статистика + QR -->
+                <div class="col-right">
+                    <!-- Зарплаты по городам -->
+                    <div class="salary-grid">
+                        <div class="salary-mini-card">
+                            <div class="city"><i class="fas fa-city"></i> МОСКВА</div>
+                            <div class="amount">от 150 000 ₽</div>
+                        </div>
+                        <div class="salary-mini-card">
+                            <div class="city"><i class="fas fa-tree"></i> ВАЛДАЙ</div>
+                            <div class="amount">от 200 000 ₽</div>
+                        </div>
+                    </div>
+
+                    <!-- Статистика трудоустройства -->
+                    <div class="stats-card">
+                        <div class="stats-number" id="hiredCounter">0</div>
+                        <div class="stats-label">СПЕЦИАЛИСТОВ УЖЕ ТРУДОУСТРОЕНО</div>
+                        <div style="font-size: 0.7rem; margin-top: 12px;">🚀 + каждый день</div>
+                    </div>
+
+                    <!-- Динамический QR-код -->
+                    <div class="qr-section">
+                        <div class="qr-code" id="qrCode">
+                            🏗️
+                        </div>
+                        <div class="qr-text" id="qrText">
+                            Наведи камеру → Переход в Telegram
+                        </div>
+                    </div>
+
+                    <!-- Короткий призыв -->
+                    <div style="text-align: center; margin-top: 20px; font-size: 0.8rem; background: rgba(255,215,0,0.1); padding: 12px; border-radius: 40px;">
+                        <i class="fas fa-bolt"></i> Откликнись сейчас — начни завтра! <i class="fas fa-bolt"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Футер визитки -->
+            <div class="visa-footer">
+                <p><i class="fas fa-shield-alt"></i> © 2026 PROFSTROY ELITE — Премиальный строительный рекрутинг. Работа в Москве и Валдае.</p>
+                <p style="margin-top: 8px;">📍 Объекты: Жилой комплекс «Монолит» (Москва) | «Березовый» (Валдай)</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========== ДАННЫЕ ДЛЯ ПЕРЕКЛЮЧАТЕЛЯ ВАКАНСИЙ ==========
+        const jobsData = {
+            demolition: {
+                icon: '🧱',
+                salary: 'от 150 000 ₽',
+                desc: 'Демонтаж, подсобные работы, помощь бригадам. Без опыта — обучим!',
+                qrText: 'Напиши "Разнорабочий" в Telegram'
+            },
+            monolith: {
+                icon: '🏗️',
+                salary: 'до 220 000 ₽',
+                desc: 'Армирование, опалубка, заливка бетона. Опыт от 1 года.',
+                qrText: 'Напиши "Монолитчик" в Telegram'
+            },
+            finisher: {
+                icon: '🎨',
+                salary: 'до 190 000 ₽',
+                desc: 'Штукатурка, шпаклёвка, покраска. Аккуратность и качество.',
+                qrText: 'Напиши "Отделочник" в Telegram'
+            },
+            foreman: {
+                icon: '📐',
+                salary: 'от 250 000 ₽',
+                desc: 'Управление участком, контроль качества. Опыт от 3 лет.',
+                qrText: 'Напиши "Прораб" в Telegram'
+            }
+        };
+
+        // Элементы DOM
+        const jobBtns = document.querySelectorAll('.job-btn');
+        const jobIcon = document.getElementById('jobIcon');
+        const jobSalary = document.getElementById('jobSalary');
+        const jobDesc = document.getElementById('jobDesc');
+        const qrCode = document.getElementById('qrCode');
+        const qrText = document.getElementById('qrText');
+
+        // Функция переключения вакансии
+        function switchJob(jobKey) {
+            const data = jobsData[jobKey];
+            if (!data) return;
+            
+            jobIcon.textContent = data.icon;
+            jobSalary.textContent = data.salary;
+            jobDesc.textContent = data.desc;
+            qrCode.textContent = data.icon;
+            qrText.textContent = data.qrText;
+            
+            // Активный класс для кнопок
+            jobBtns.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-job') === jobKey) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        // Навешиваем обработчики
+        jobBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const jobKey = btn.getAttribute('data-job');
+                switchJob(jobKey);
+            });
+        });
+
+        // ========== АНИМИРОВАННЫЙ СЧЁТЧИК ТРУДОУСТРОЕННЫХ ==========
+        const hiredCounter = document.getElementById('hiredCounter');
+        const targetNumber = 1250;
+        let currentNumber = 0;
+        
+        function animateCounter() {
+            const interval = setInterval(() => {
+                if (currentNumber < targetNumber) {
+                    currentNumber += Math.ceil(targetNumber / 60);
+                    if (currentNumber > targetNumber) currentNumber = targetNumber;
+                    hiredCounter.textContent = currentNumber.toLocaleString();
+                } else {
+                    clearInterval(interval);
+                }
+            }, 25);
+        }
+        
+        // Запускаем счётчик когда элемент в видимости
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter();
+                    observer.disconnect();
+                }
+            });
+        });
+        observer.observe(hiredCounter);
+        
+        // ========== МИКРО-АНИМАЦИЯ ДЛЯ КОНТАКТОВ ==========
+        const contactItems = document.querySelectorAll('.contact-item');
+        contactItems.forEach(item => {
+            item.addEventListener('click', () => {
+                item.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    item.style.transform = '';
+                }, 150);
+            });
+        });
+        
+        // ========== КОНСОЛЬНЫЙ ПРИВЕТ ==========
+        console.log('🏗️ PROFSTROY ELITE — премиальная визитка строительного рекрутинга');
+        console.log('📞 Контакты: WhatsApp +375 29 844 5000 | Telegram +375 33 655 8368');
+        
+        // ========== ДИНАМИЧЕСКАЯ ПОДСТАНОВКА ГОДА ==========
+        const yearSpan = document.querySelector('.badge-area');
+        // уже есть 2026 в тексте
+    </script>
+</body>
+</html>
